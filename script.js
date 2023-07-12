@@ -30,7 +30,14 @@ function createBook() {
     a.textContent = "Author: " + "me";
     e.textContent = "Edit";
     d.textContent = "Delete";
+
+    d.addEventListener("click", removeBook);
     
     c.append(t, a, r, e, d);
     main.appendChild(c);
+}
+
+function removeBook(e) {
+    let c = e.target.parentElement;
+    main.removeChild(c);
 }
