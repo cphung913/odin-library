@@ -1,4 +1,12 @@
+const newButton = document.querySelector(".new");
+
 let myLibrary = [];
+
+newButton.addEventListener("click", makeBook)
+
+function makeBook() {
+
+}
 
 function Book(title, author, read) {
   this.title = title;
@@ -10,6 +18,6 @@ Book.prototype.addBookToLibrary = function() {
   myLibrary.push(this);
 }
 
-const book1 = new Book("yay", "me", false);
-book1.addBookToLibrary();
-console.log(myLibrary);
+function displayBooks(array) {
+
+}
