@@ -1,40 +1,39 @@
 const newButton = document.querySelector(".new");
-const main = document.querySelector(".main")
+const main = document.querySelector(".main");
 
-const card = document.createElement("div");
-const title = document.createElement("div");
-const author = document.createElement("div");
-const readStatus = document.createElement("img");
-const editButton = document.createElement("button");
-const deleteButton = document.createElement("button")
+const card = document.querySelector(".card");
+const children = document.querySelector(".card").childNodes;
 
 newButton.addEventListener("click", createBook);
 
-readStatus.setAttribute("src", "");
-card.classList.add("card");
-title.classList.add("title");
-author.classList.add("author");
-readStatus.classList.add("read-status");
-editButton.classList.add("edit");
-deleteButton.classList.add("delete");
+main.removeChild(card);
 
 function createBook() {
-    const t = title.cloneNode();
-    const a = author.cloneNode();
-    const r = readStatus.cloneNode();
-    const c = card.cloneNode();
-    const e = editButton.cloneNode();
-    const d = deleteButton.cloneNode();
+    const temp = card.cloneNode();
 
-    t.textContent = "Title: " + "me";
-    a.textContent = "Author: " + "me";
-    e.textContent = "Edit";
-    d.textContent = "Delete";
+    children.forEach(x => {
+        if (x.nodeName == "#text") return;
+        const child = x.cloneNode();
+        let value;
+        switch(child.classList.value) {
+            case "title":
+                value = "Title: ";
+                break;
+            case "author":
+                value = "Author: ";
+                break;
+            case "edit":
+                value = "Edit";
+                break;
+            case "delete":
+                value = "Delete";
+                break;
+        }
+        child.textContent = value;
+        temp.appendChild(child);
+    })
 
-    d.addEventListener("click", removeBook);
-    
-    c.append(t, a, r, e, d);
-    main.appendChild(c);
+    main.appendChild(temp);
 }
 
 function removeBook(e) {

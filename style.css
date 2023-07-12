@@ -82,3 +82,71 @@ header .title {
     margin-top: .5rem;
     background-color: var(--a);
 }
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--b);
+    height: 500px;
+    width: 400px;
+    border: 3px solid black;
+    border-radius: 25px;
+    padding: 2rem;
+}
+
+.popup-header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px dashed black;
+    margin-bottom: 2rem;
+}
+
+.popup-header .title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.popup-header button {
+    margin-left: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-bottom: 2rem;
+}
+
+input[type=text] {
+    height: 30px;
+    font-size: 20px;
+    border-radius: 6px;
+}
+
+label {
+    font-size: 20px;
+    margin-bottom: .3rem;
+}
+
+form button {
+    height: 40px;
+    width: 50%;
+    margin: 0px auto;
+    margin-top: 40px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.popup-header .close-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.75rem;
+    font-weight: bold;
+}
