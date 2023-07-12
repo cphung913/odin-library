@@ -69,6 +69,10 @@ header .title {
     margin: 12px 0px;
 }
 
+.read-status {
+    font-size: 20px;
+}
+
 .card button {
     height: 40px;
     width: 100%;

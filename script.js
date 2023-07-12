@@ -8,11 +8,13 @@ const popupSubmit = document.querySelector(".popup-submit");
 const titleInput = document.getElementById("title");
 const authorInput = document.getElementById("author");
 const checkBox = document.getElementById("read");
+const closeButton = document.querySelector(".close-button");
 
 main.removeChild(card);
 
 newButton.addEventListener("click", callForm);
 popupSubmit.addEventListener("click", endForm);
+closeButton.addEventListener("click", endForm);
 
 function createBook(values) {
     const temp = card.cloneNode();
@@ -34,6 +36,9 @@ function createBook(values) {
             case "delete":
                 value = "Delete";
                 child.addEventListener("click", removeBook)
+                break;
+            case "read-status":
+                value = "Finished: " + (values.isRead ? "\u2713" : "X");
                 break;
         }
         child.textContent = value;
@@ -67,13 +72,14 @@ function endForm(e) {
             authorInput.classList.add("invalid");
             return;
         }
-        const x = new book(titleInput.value.trim(), authorInput.value.trim(), checkBox.value);
-        titleInput.value = "";
-        authorInput.value = "";
+        const x = new book(titleInput.value.trim(), authorInput.value.trim(), checkBox.checked);
         createBook(x);
     } 
     popup.classList.remove("active");
     overlay.classList.remove("active");
+    titleInput.value = "";
+    authorInput.value = "";
+    checkBox.checked = false;
 }
 
 function removeBook(e) {
