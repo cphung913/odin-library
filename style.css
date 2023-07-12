@@ -87,13 +87,19 @@ header .title {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
     background-color: var(--b);
     height: 500px;
     width: 400px;
     border: 3px solid black;
     border-radius: 25px;
     padding: 2rem;
+    z-index: 1;
+}
+
+.popup.active {
+    transform: translate(-50%, -50%) scale(1)
 }
 
 .popup-header {
@@ -126,6 +132,7 @@ input[type=text] {
     height: 30px;
     font-size: 20px;
     border-radius: 6px;
+    outline: none;
 }
 
 label {
@@ -133,7 +140,7 @@ label {
     margin-bottom: .3rem;
 }
 
-form button {
+.popup-submit {
     height: 40px;
     width: 50%;
     margin: 0px auto;
@@ -149,4 +156,30 @@ form button {
     background: none;
     font-size: 1.75rem;
     font-weight: bold;
+}
+
+.overlay {
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    transition: 200ms ease-in-out;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.invalid {
+    border: 2px solid red;
+}
+
+input[type=text]:focus {
+    box-shadow: 5px 5px 5px lightblue;
+    border: 1px solid rgb(0, 120, 159);
 }
