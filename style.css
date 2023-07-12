@@ -35,7 +35,7 @@ header {
     border-radius: 20px;
 }
 
-.title {
+header .title {
     padding-top: auto;
     color: var(--pink);
     font-size: 44px;
