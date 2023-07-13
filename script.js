@@ -10,6 +10,10 @@ const authorInput = document.getElementById("author");
 const checkBox = document.getElementById("read");
 const closeButton = document.querySelector(".close-button");
 
+let isInvlaid = false;
+let isEditing = false;
+let currentBook;
+
 main.removeChild(card);
 
 newButton.addEventListener("click", callForm);
@@ -32,6 +36,7 @@ function createBook(values) {
                 break;
             case "edit":
                 value = "Edit";
+                child.addEventListener("click", editBook);
                 break;
             case "delete":
                 value = "Delete";
@@ -46,6 +51,7 @@ function createBook(values) {
     })
 
     main.appendChild(temp);
+    return temp;
 }
 
 function book(title, author, isRead) {
@@ -56,7 +62,7 @@ function book(title, author, isRead) {
 
 function callForm() {
     popup.classList.add("active");
-    overlay.classList.add("active");   
+    overlay.classList.add("active");
 }
 
 function endForm(e) {
@@ -73,8 +79,15 @@ function endForm(e) {
             return;
         }
         const x = new book(titleInput.value.trim(), authorInput.value.trim(), checkBox.checked);
-        createBook(x);
-    } 
+        if (!isEditing) {
+            createBook(x);
+        } else {
+            currentBook = x;
+            isEditing = false;
+        }
+    } else {
+        isInvlaid = true;
+    }
     popup.classList.remove("active");
     overlay.classList.remove("active");
     titleInput.value = "";
@@ -85,4 +98,31 @@ function endForm(e) {
 function removeBook(e) {
     let c = e.target.parentElement;
     main.removeChild(c);
+}
+
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
+async function editBook(e) {
+    let array = Array.from(e.target.parentNode.parentNode.children)
+    let index = array.indexOf(e.target.parentNode);
+    callForm();
+    isEditing = true;
+    
+    while (isEditing) {
+        await delay(100);
+    }
+
+    isEditing = false;
+    if (!isInvlaid) {     
+        array.forEach(x => {
+            main.removeChild(x);
+        })
+        array[index] = createBook(currentBook);
+        array.forEach(x => {
+            main.appendChild(x);
+        })
+    } else if (isInvlaid) {
+        isInvlaid = false;
+        return;
+    }
 }
