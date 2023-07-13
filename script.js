@@ -60,7 +60,13 @@ function book(title, author, isRead) {
     this.isRead = isRead;
 }
 
-function callForm() {
+function callForm(x) {
+    if (isEditing) {
+        titleInput.value = x.children[0].textContent.slice(7);
+        authorInput.value = x.children[1].textContent.slice(8);
+        checkBox.checked = (x.children[2].textContent.slice(10) == "X" ? false : true);
+        popup.children[0].children[0].textContent = "Edit Book";
+    }
     popup.classList.add("active");
     overlay.classList.add("active");
 }
@@ -83,7 +89,6 @@ function endForm(e) {
             createBook(x);
         } else {
             currentBook = x;
-            isEditing = false;
         }
     } else {
         isInvlaid = true;
@@ -93,6 +98,8 @@ function endForm(e) {
     titleInput.value = "";
     authorInput.value = "";
     checkBox.checked = false;
+    isEditing = false;
+    popup.children[0].children[0].textContent = "New Book";
 }
 
 function removeBook(e) {
@@ -105,8 +112,8 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 async function editBook(e) {
     let array = Array.from(e.target.parentNode.parentNode.children)
     let index = array.indexOf(e.target.parentNode);
-    callForm();
     isEditing = true;
+    callForm(e.target.parentElement);
     
     while (isEditing) {
         await delay(100);
