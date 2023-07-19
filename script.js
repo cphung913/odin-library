@@ -54,10 +54,12 @@ function createBook(values) {
     return temp;
 }
 
-function book(title, author, isRead) {
-    this.title = title;
-    this.author = author;
-    this.isRead = isRead;
+class Book {
+    constructor(title, author, isRead) {
+        this.title = title;
+        this.author = author;
+        this.isRead = isRead;
+    }
 }
 
 function callForm(x) {
@@ -84,7 +86,7 @@ function endForm(e) {
             authorInput.classList.add("invalid");
             return;
         }
-        const x = new book(titleInput.value.trim(), authorInput.value.trim(), checkBox.checked);
+        const x = new Book(titleInput.value.trim(), authorInput.value.trim(), checkBox.checked);
         if (!isEditing) {
             createBook(x);
         } else {
